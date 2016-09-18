@@ -1,6 +1,7 @@
 /* jscs:disable requireDotNotation */
 import Ember from 'ember';
 import BaseAuthenticator from './base';
+import Configuration from 'ember-simple-auth/configuration';
 
 const {
   RSVP,
@@ -65,7 +66,7 @@ export default BaseAuthenticator.extend({
     @default '/token'
     @public
   */
-  serverTokenEndpoint: '/token',
+  serverTokenEndpoint: Configuration.baseURL + '/token',
 
   /**
     The endpoint on the server that token revocation requests are sent to. Only
@@ -291,6 +292,7 @@ export default BaseAuthenticator.extend({
       url,
       data,
       type:        'POST',
+      crossDomain: true,
       dataType:    'json',
       contentType: 'application/x-www-form-urlencoded',
       headers
